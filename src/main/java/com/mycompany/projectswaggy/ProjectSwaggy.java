@@ -6,6 +6,7 @@ package com.mycompany.projectswaggy;
 
 /**
  *
+ * 
  * @author Avaneesh Koushik
  */
 public class ProjectSwaggy {
@@ -14,7 +15,7 @@ public class ProjectSwaggy {
         System.out.println("Hello World!");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dpMainMenu().setVisible(true);
+                new dpHome().setVisible(true);
             }
         });
     }
