@@ -22,6 +22,7 @@ public class dpHome extends javax.swing.JFrame {
     Connection con;
     Statement st;
     PreparedStatement ps;
+    String dpid;
     //ResultSet rs;
     /**
      * Creates new form dpMainMenu
@@ -121,7 +122,7 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
 
         jPanel6.setBackground(new java.awt.Color(160, 63, 65));
 
-        toCurr.setText("Current Orders");
+        toCurr.setText("Current Order");
         toCurr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 toCurrActionPerformed(evt);
@@ -136,6 +137,11 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         });
 
         jButton1.setText("Extra Features");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -196,11 +202,12 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                                             .addComponent(dpAvailability, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(dpPincode)
-                                    .addComponent(dpPhone, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(dpPincode))
                                 .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(dpName)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dpPhone, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dpName))
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
@@ -255,7 +262,8 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
 
     private void tbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbuttonActionPerformed
         // TODO add your handling code here:
-        String sqlu = "select * from delivery_partner where dp_id='"+test.getText()+"'";
+        dpid=test.getText();
+        String sqlu = "select * from delivery_partner where dp_id='"+dpid+"'";
         JOptionPane.showMessageDialog(this,sqlu);
         try (Statement stmt = con.createStatement()) {
             //ps = con.prepareStatement(sqlu);
@@ -285,16 +293,56 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
 
     private void toCurrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toCurrActionPerformed
         // TODO add your handling code here:
-                        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new dpCurrentOrder(con).setVisible(true);
+        dpid=test.getText();
+        String sqlu = "select Status from orders where dp_id='"+dpid+"' and Status != 'DELIVERED'";
+        try (Statement stmt = con.createStatement()) {
+            //ps = con.prepareStatement(sqlu);
+            ResultSet rs = stmt.executeQuery(sqlu);
+            //rs.next();
+            JOptionPane.showMessageDialog(this,"hi");
+            while (rs.next()) {
+                JOptionPane.showMessageDialog(this,"bye");
+                JOptionPane.showMessageDialog(this,rs.getString("Status"));
+                if (rs.getString("Status").equals("PENDING") || rs.getString("Status").equals("COMPLETED"))
+                {
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new dptoRestaurant(con,dpid).setVisible(true);
+                        }
+                    });
+                }
+                else
+                {
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new dpCurrentOrder(con,dpid).setVisible(true);
+                    }
+                    });
+                }   
             }
-        });
+         }
+         catch (SQLException e) {
+            //Logger.getLogger(bank.class.getName()).log(Level.SEVERE,null, e);
+            JOptionPane.showMessageDialog(this,e.getMessage());
+        }
+
     }//GEN-LAST:event_toCurrActionPerformed
 
     private void toDhistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toDhistoryActionPerformed
         // TODO add your handling code here:
+        dpid=test.getText();
+        JOptionPane.showMessageDialog(this, dpid);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new dpDeliveryHistory(con,dpid).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_toDhistoryActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

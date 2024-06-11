@@ -63,12 +63,14 @@
                                       <Component id="tbutton" min="-2" pref="53" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="dpPincode" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dpPhone" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="dpName" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="dpPhone" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="dpName" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -194,7 +196,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="toCurr" max="32767" attributes="0"/>
                       <Component id="toDhistory" max="32767" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
+                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -217,7 +219,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="toCurr">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Current Orders"/>
+            <Property name="text" type="java.lang.String" value="Current Order"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toCurrActionPerformed"/>
@@ -235,6 +237,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Extra Features"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
