@@ -41,28 +41,11 @@ public class dpDeliveryHistory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        earnToday = new javax.swing.JTextField();
-        delvToday = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         dpHistory = new javax.swing.JTable();
         refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel8.setText("Total Deliveries Today :");
-
-        jLabel9.setText("Today's Earnings :");
-
-        earnToday.setFocusable(false);
-
-        delvToday.setFocusable(false);
-        delvToday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delvTodayActionPerformed(evt);
-            }
-        });
 
         dpHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,36 +73,17 @@ public class dpDeliveryHistory extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(delvToday)
-                    .addComponent(earnToday, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refresh)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(delvToday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(earnToday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(refresh)))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
+                .addComponent(refresh)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -127,13 +91,9 @@ public class dpDeliveryHistory extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void delvTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delvTodayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delvTodayActionPerformed
-
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         // TODO add your handling code here:
-        String sqlu = "select o.o_id,o.delv_date,oa.o_pincode,p.total_price from orders o,order_address oa,payment p where o.dp_id='"+dpid+"' and o.o_address=oa.o_address and p.o_id=o.o_id";
+        String sqlu = "select o.o_id,o.delv_date,oa.o_pincode,p.total_price from orders o,order_address oa,payment p where o.dp_id='"+dpid+"' and o.o_address=oa.o_address and p.o_id=o.o_id and trunc(o.delv_date)=trunc(current_date)";
         //JOptionPane.showMessageDialog(this,sqlu);
         try (Statement stmt = con.createStatement()) {//(Statement stmt = con.createStatement())
 //            ps = con.prepareStatement(sqlu);
@@ -213,11 +173,7 @@ public class dpDeliveryHistory extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField delvToday;
     private javax.swing.JTable dpHistory;
-    private javax.swing.JTextField earnToday;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refresh;
     // End of variables declaration//GEN-END:variables

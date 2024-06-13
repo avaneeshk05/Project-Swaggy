@@ -67,13 +67,14 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         dpRatings = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         dpPincode = new javax.swing.JTextField();
-        dpAvailability = new javax.swing.JRadioButton();
         test = new javax.swing.JTextField();
         tbutton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         toCurr = new javax.swing.JButton();
         toDhistory = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        dpAvailability = new javax.swing.JComboBox<>();
+        updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,13 +106,6 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         });
 
         jLabel6.setText("Current Pincode :");
-
-        dpAvailability.setText("Availability");
-        dpAvailability.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpAvailabilityActionPerformed(evt);
-            }
-        });
 
         tbutton.setText("ok");
         tbutton.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +161,29 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dpAvailability.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Unavailable" }));
+        dpAvailability.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                dpAvailabilityAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        dpAvailability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpAvailabilityActionPerformed(evt);
+            }
+        });
+
+        updateButton.setText("update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,21 +211,24 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dpRatings)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(dpAvailability, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(dpPincode))
                                 .addGap(28, 28, 28))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(dpPhone, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dpName))
-                                .addContainerGap())))))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 11, Short.MAX_VALUE)
+                                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dpAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(updateButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +243,7 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpRatings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
@@ -232,7 +252,9 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                     .addComponent(jLabel6)
                     .addComponent(dpPincode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(dpAvailability)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dpAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,10 +278,6 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         // TODO add your handling code here:
     }//GEN-LAST:event_dpRatingsActionPerformed
 
-    private void dpAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpAvailabilityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dpAvailabilityActionPerformed
-
     private void tbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbuttonActionPerformed
         // TODO add your handling code here:
         dpid=test.getText();
@@ -276,13 +294,14 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                 dpPhone.setText(rs.getString("dp_phno"));
                 dpRatings.setText(rs.getString("dp_ratings"));
                 dpPincode.setText(rs.getString("dp_pincode"));
+                JOptionPane.showMessageDialog(this,rs.getString("dp_availability"));
                 if (rs.getString("dp_availability").equals("1"))
                 {
-                    dpAvailability.setEnabled(true);
+                    //dpAvailability.setSelected(true);
                 }
                 else
                 {
-                    dpAvailability.setEnabled(false);
+                    //dpAvailability.setSelected(false);
                 }
             }
         } catch (SQLException e) {
@@ -311,7 +330,7 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
                         }
                     });
                 }
-                else
+                else if (rs.getString("Status").equals("OUT FOR DELIVERY"))
                 {
                     java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -332,6 +351,7 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         // TODO add your handling code here:
         dpid=test.getText();
         JOptionPane.showMessageDialog(this, dpid);
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new dpDeliveryHistory(con,dpid).setVisible(true);
@@ -343,6 +363,51 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void dpAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpAvailabilityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dpAvailabilityActionPerformed
+
+    private void dpAvailabilityAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_dpAvailabilityAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dpAvailabilityAncestorAdded
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        
+            PreparedStatement ps2;
+            try
+            {
+                int a=0;
+                System.out.println("bbbb");
+                if (dpAvailability.getSelectedItem().toString().equals("Available"))
+                {
+                    a = 1; 
+                    System.out.println("aaaa");
+                }
+                else if (dpAvailability.getSelectedItem().toString().equals("Unavailable"))
+                {
+                    a=0;
+                    System.out.println("cccc");
+                }
+                String sqlu = "update delivery_partner set dp_availability = ? where dp_id=?";
+                ps2 = con.prepareStatement(sqlu);
+                ps2.setInt(1,a);
+                ps2.setString(2,dpid);
+                JOptionPane.showMessageDialog(this,ps2.toString());
+                System.out.println(dpid);
+                int r=ps2.executeUpdate();
+                //con.commit();
+                System.out.println(r);
+                JOptionPane.showMessageDialog(this,"Updated Status");
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this,e.getMessage());
+            }
+  
+        
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +446,7 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton dpAvailability;
+    private javax.swing.JComboBox<String> dpAvailability;
     private javax.swing.JTextField dpName;
     private javax.swing.JTextField dpPhone;
     private javax.swing.JTextField dpPincode;
@@ -397,5 +462,6 @@ JOptionPane.showMessageDialog(this,ex.getMessage());
     private javax.swing.JTextField test;
     private javax.swing.JButton toCurr;
     private javax.swing.JButton toDhistory;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
