@@ -1,5 +1,5 @@
 
-A food delivery management system integrated with maps, built using Java and Oracle SQL.
+A food delivery management system integrated with maps using jxmaps, built using Java and Oracle SQL.
 
 **IMPLEMENTATION**
 
